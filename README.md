@@ -19,9 +19,28 @@ This process will spend some time according to the size of your environment, the
 
 After conclude, the output will be something similar to below
 
+// Hypervisor and Content Host subscribed
+---
 $ ./complete_hypervisor_content-host_report.py | tee -a /tmp/report.log
 hypervisor_name,hypervisor_entitlement,content_host_name,content_host_entitlement
 virt-who-ironman.home-1,Employee SKU,testmachine01.local.domain,zabbix
 virt-who-ironman.home-1,Employee SKU,testmachine01.local.domain,Employee SKU
 $
+---
+
+// Only Hypervisor subscribed
+---
+$ ./complete_hypervisor_content-host_report.py | tee -a /tmp/report.log
+hypervisor_name,hypervisor_entitlement,content_host_name,content_host_entitlement
+virt-who-ironman.home-1,Employee SKU,None,None
+$
+---
+
+// Hypervisor without subscription
+---
+$ ./complete_hypervisor_content-host_report.py | tee -a /tmp/report.log
+hypervisor_name,hypervisor_entitlement,content_host_name,content_host_entitlement
+virt-who-ironman.home-1,None,None,None
+$
+---
 ```
