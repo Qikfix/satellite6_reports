@@ -66,3 +66,7 @@ Report used to show all machines on Satellite but with some interesting informat
 This report will generate the output looks like below
 ...
 ```
+
+At the end of the day, we expect to see all reports here available on hammer.
+
+Thanks for use and feel free to send feedback!
