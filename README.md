@@ -11,7 +11,8 @@ This report will generate the output looks like below
 ```
  - List all Hypervisors with last checking > 1 week
 ```
-Report used to show Hypervisors not available anymore on the virtualization environment (or just removed by filter).
+Report used to show Hypervisors not available anymore on the virtualization environment 
+(or just removed by filter).
 
 This report will generate the output looks like below
 ...
