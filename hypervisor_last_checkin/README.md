@@ -31,5 +31,7 @@ localhost,virt-who-localhost-1,hypervisor,2018-10-06 11:11:57.825-04
 ---
 ```
 
+The main idea of this report is help you to identify what hypervisor probably is not anymore on your environment BUT still on the Satellite webUI.
+
 # Attention
 This script HAVE TO BE executed on the Satellite Server. Currently we are executing some DB commands and for this reason, this is mandatory.
