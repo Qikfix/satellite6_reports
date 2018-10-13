@@ -17,13 +17,6 @@ Report used to show Hypervisors not available anymore on the virtualization envi
 This report will generate the output looks like below
 ...
 ```
- - How to Delete all Hypervisors with last checking > 1 week
-```
-Way to map and remove entries from Satellite automatically
-
-This report will generate the output looks like below
-...
-```
  - List all Hypervisors Subscribed
 ```
 Report used to show all Hypervisors subscribed (normally by VDC)
