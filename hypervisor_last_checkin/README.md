@@ -1,4 +1,4 @@
-Hypervisors Report
+# Hypervisors Report
 
 This report will help you to identify what hypervisor is not beeing reported to the Satellite anymore.
 
