@@ -17,7 +17,8 @@ except ImportError:
     sys.exit(-1)
 
 # URL to your Satellite 6 server
-URL = "https://sat631.local.domain"
+# URL = "https://sat631.local.domain"
+URL="https://10.12.211.50"
 # URL for the API to your deployed Satellite 6 server
 # SAT_API = "%s/katello/api/v2/" % URL
 SAT_API = "%s/api/v2/" % URL
@@ -25,7 +26,7 @@ SAT_API = "%s/api/v2/" % URL
 KATELLO_API = "%s/katello/api/" % URL
 POST_HEADERS = {'content-type': 'application/json'}
 # Default credentials to login to Satellite 6
-USERNAME = "admin"
+USERNAME = "satadmin"
 PASSWORD = "redhat"
 # Ignore SSL for now
 SSL_VERIFY = False
@@ -65,7 +66,7 @@ def main():
 
         # Hypervisor Entitlement
         try:
-            subscription_name = hyper_info['results'][0]['name']
+            subscription_name = hyper_info['results'][0]['name'].replace(",","")
         except IndexError:
             subscription_name = None
 
@@ -84,7 +85,7 @@ def main():
                     print "{},{},{},{}".format(hypervisor_name,subscription_name,content_host_name,ch_entitlement)
                 else:
                     for ch_entitlement in content_host_info['results']:
-                        print "{},{},{},{}".format(hypervisor_name,subscription_name,content_host_name,ch_entitlement['product_name'])
+                        print "{},{},{},{}".format(hypervisor_name,subscription_name,content_host_name,ch_entitlement['product_name'].replace(",",""))
 
 
 
