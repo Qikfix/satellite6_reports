@@ -1,4 +1,4 @@
-Satellite6 Reports
+# Complete Report
 
 Some reports to help you on the management process.
 
@@ -44,3 +44,5 @@ virt-who-ironman.home-1,None,None,None
 $
 ---
 ```
+
+Using this report you will be able to identify what Entitlement is attached in your Hypervisor as in your Content Host.
