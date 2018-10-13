@@ -17,8 +17,7 @@ except ImportError:
     sys.exit(-1)
 
 # URL to your Satellite 6 server
-# URL = "https://sat631.local.domain"
-URL="https://10.12.211.50"
+URL = "https://sat631.local.domain"
 # URL for the API to your deployed Satellite 6 server
 # SAT_API = "%s/katello/api/v2/" % URL
 SAT_API = "%s/api/v2/" % URL
@@ -26,7 +25,7 @@ SAT_API = "%s/api/v2/" % URL
 KATELLO_API = "%s/katello/api/" % URL
 POST_HEADERS = {'content-type': 'application/json'}
 # Default credentials to login to Satellite 6
-USERNAME = "satadmin"
+USERNAME = "admin"
 PASSWORD = "redhat"
 # Ignore SSL for now
 SSL_VERIFY = False
