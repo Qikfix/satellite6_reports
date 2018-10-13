@@ -12,7 +12,7 @@ Edit the file and update the fields to match with your environment
  - PASSWORD = "redhat"
  - MAX_DAYS="7"
 
-Note. MAX_DAYS say the number of days you would like to keep. For example, to filter
+Note. MAX_DAYS say the number of days you would like to skip. For example, to filter
 all hypervisor without report for one week or more, just define "7" here.
 
 # ./hypervisor_last_checkin.py | tee -a /tmp/hypervisor_last_checkin.csv
