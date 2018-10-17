@@ -1,5 +1,5 @@
 #!/usr/bin/python
-""" 
+"""
     Date .......: 10/11/2018
     Developer ..: Waldirio M Pinheiro (waldirio@redhat.com / waldirio@gmail.com)
     Purpose ....: Collect information from Satellite Server and show hypervisor versus Content Host 
@@ -79,12 +79,22 @@ def main():
                 content_host_name = content_host['name']
                 content_host_info = get_json(SAT_API + "hosts/" + str(content_host_id) + "/subscriptions")
 
-                if (len(content_host_info['results']) == 0):
-                    ch_entitlement = None
-                    print "{},{},{},{}".format(hypervisor_name,subscription_name,content_host_name,ch_entitlement)
+                check_results = 0
+
+                try:
+                    check_results = len(content_host_info['results'])
+                except KeyError:
+                    check_results = -999
+
+                if (check_results == -999 ):
+                    ch_entitlement = "Check This Machine"
                 else:
-                    for ch_entitlement in content_host_info['results']:
-                        print "{},{},{},{}".format(hypervisor_name,subscription_name,content_host_name,ch_entitlement['product_name'].replace(",",""))
+                    if (len(content_host_info['results']) == 0):
+                        ch_entitlement = None
+                        print "{},{},{},{}".format(hypervisor_name,subscription_name,content_host_name,ch_entitlement)
+                    else:
+                        for ch_entitlement in content_host_info['results']:
+                            print "{},{},{},{}".format(hypervisor_name,subscription_name,content_host_name,ch_entitlement['product_name'].replace(",",""))
 
 
 
