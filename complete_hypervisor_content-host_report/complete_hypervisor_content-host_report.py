@@ -9,6 +9,9 @@
 import urllib3
 import json
 import sys
+import time
+import threading
+
 
 try:
     import requests
@@ -44,8 +47,49 @@ def get_json(location):
     return r.json()
 
 
-def main():
+def process_list(hyper_list):
 
+    hyper_info = get_json(SAT_API + "hosts/" + str(hyper_list['id']) + "/subscriptions")
+    hyper_detail = get_json(SAT_API + "hosts/" + str(hyper_list['id']))
+
+    # Hypervisor Name
+    hypervisor_name = hyper_list['name']
+
+    # Hypervisor Entitlement
+    try:
+        subscription_name = hyper_info['results'][0]['name'].replace(",","")
+    except IndexError:
+        subscription_name = None
+
+    if (len(hyper_detail['subscription_facet_attributes']['virtual_guests']) == 0):
+        content_host_name = None
+        ch_entitlement = None
+        print "{},{},{},{}".format(hypervisor_name,subscription_name,content_host_name,ch_entitlement)
+    else:
+        for content_host in hyper_detail['subscription_facet_attributes']['virtual_guests']:
+            content_host_id = content_host['id']
+            content_host_name = content_host['name']
+            content_host_info = get_json(SAT_API + "hosts/" + str(content_host_id) + "/subscriptions")
+
+            check_results = 0
+
+            try:
+                check_results = len(content_host_info['results'])
+            except KeyError:
+                check_results = -999
+
+            if (check_results == -999 ):
+                ch_entitlement = "Check This Machine"
+            else:
+                if (len(content_host_info['results']) == 0):
+                    ch_entitlement = None
+                    print "{},{},{},{}".format(hypervisor_name,subscription_name,content_host_name,ch_entitlement)
+                else:
+                    for ch_entitlement in content_host_info['results']:
+                        print "{},{},{},{}".format(hypervisor_name,subscription_name,content_host_name,ch_entitlement['product_name'].replace(",",""))
+
+
+def main():
     hyper_list = []
 
     hosts = get_json(SAT_API + "hosts" + "?per_page=" + NUM_ENTRIES_ON_REPORT)
@@ -55,47 +99,11 @@ def main():
     for host in hosts['results']:
         if 'virt-who' in host['name']:
             hyper_list.append(host)
-
-    for hyper in hyper_list:
-        hyper_info = get_json(SAT_API + "hosts/" + str(hyper['id']) + "/subscriptions")
-        hyper_detail = get_json(SAT_API + "hosts/" + str(hyper['id']))
-
-        # Hypervisor Name
-        hypervisor_name = hyper['name']
-
-        # Hypervisor Entitlement
-        try:
-            subscription_name = hyper_info['results'][0]['name'].replace(",","")
-        except IndexError:
-            subscription_name = None
-
-        if (len(hyper_detail['subscription_facet_attributes']['virtual_guests']) == 0):
-            content_host_name = None
-            ch_entitlement = None
-            print "{},{},{},{}".format(hypervisor_name,subscription_name,content_host_name,ch_entitlement)
-        else:
-            for content_host in hyper_detail['subscription_facet_attributes']['virtual_guests']:
-                content_host_id = content_host['id']
-                content_host_name = content_host['name']
-                content_host_info = get_json(SAT_API + "hosts/" + str(content_host_id) + "/subscriptions")
-
-                check_results = 0
-
-                try:
-                    check_results = len(content_host_info['results'])
-                except KeyError:
-                    check_results = -999
-
-                if (check_results == -999 ):
-                    ch_entitlement = "Check This Machine"
-                else:
-                    if (len(content_host_info['results']) == 0):
-                        ch_entitlement = None
-                        print "{},{},{},{}".format(hypervisor_name,subscription_name,content_host_name,ch_entitlement)
-                    else:
-                        for ch_entitlement in content_host_info['results']:
-                            print "{},{},{},{}".format(hypervisor_name,subscription_name,content_host_name,ch_entitlement['product_name'].replace(",",""))
-
+    
+    for each_hyper in hyper_list:
+        t = threading.Thread(target=process_list, args=(each_hyper,))
+        t.start()
+        time.sleep(1)
 
 
 if __name__ == "__main__":
