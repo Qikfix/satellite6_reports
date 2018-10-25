@@ -12,6 +12,7 @@ import sys
 import time
 import threading
 
+
 try:
     import requests
 except ImportError:
@@ -136,7 +137,7 @@ def main():
 
     print("4/4 - Writing the file ... {} with {} rows".format(FILE_NAME,len(final_result)))
     for each_element in final_result:
-        print >> csv_file, each_element[0],each_element[1],each_element[2],each_element[3]
+        print >> csv_file, "{},{},{},{}".format(each_element[0],each_element[1],each_element[2],each_element[3])
     csv_file.close()
     pass
 
