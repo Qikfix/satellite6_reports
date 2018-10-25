@@ -12,7 +12,6 @@ import sys
 import time
 import threading
 
-
 try:
     import requests
 except ImportError:
