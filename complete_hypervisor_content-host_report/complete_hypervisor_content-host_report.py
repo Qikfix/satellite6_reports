@@ -21,6 +21,7 @@ except ImportError:
 
 # URL to your Satellite 6 server
 URL = "https://sat631.local.domain"
+# URL = "https://10.12.211.50"
 # URL for the API to your deployed Satellite 6 server
 # SAT_API = "%s/katello/api/v2/" % URL
 SAT_API = "%s/api/v2/" % URL
@@ -29,6 +30,7 @@ KATELLO_API = "%s/katello/api/" % URL
 POST_HEADERS = {'content-type': 'application/json'}
 # Default credentials to login to Satellite 6
 USERNAME = "admin"
+# USERNAME = "satadmin"
 PASSWORD = "redhat"
 # Ignore SSL for now
 SSL_VERIFY = False
@@ -114,7 +116,9 @@ def main():
     print("1/4 - Connecting to: {} using the account: {}".format(URL, USERNAME))
 
     print("2/4 - Collecting Content Host information ...")
+    t_start = time.time()
     hosts = get_json(SAT_API + "hosts" + "?per_page=" + NUM_ENTRIES_ON_REPORT)
+    print("Time to conclude (seconds): {}".format(time.time() - t_start))
 
     csv_file = open(FILE_NAME,"w+")
     print >> csv_file, "hypervisor_name,hypervisor_entitlement,content_host_name,content_host_entitlement"    
@@ -126,6 +130,7 @@ def main():
     thread_list = []
 
     print("3/4 - Processing all entries ...")
+    t_start = time.time()
     for each_hyper in hyper_list:
         t = threading.Thread(target=process_list, args=(each_hyper,))
         t.start()
@@ -134,15 +139,15 @@ def main():
 
     for each_thread in thread_list:
         each_thread.join()
+    print("Time to conclude (seconds): {}".format(time.time() - t_start))
 
     print("4/4 - Writing the file ... {} with {} rows".format(FILE_NAME,len(final_result)))
     for each_element in final_result:
         print >> csv_file, "{},{},{},{}".format(each_element[0],each_element[1],each_element[2],each_element[3])
     csv_file.close()
-    pass
 
 if __name__ == "__main__":
-    t_start = time.time()
+    t_init = time.time()
     main()
-    print("Time to conclude (seconds): {}".format(time.time() - t_start))
+    print("TOTAL Time to conclude (seconds): {}".format(time.time() - t_init))
     pass

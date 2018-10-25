@@ -20,9 +20,11 @@ This process will spend some time according to the size of your environment, the
 $ ./complete_hypervisor_content-host_report.py 
 1/4 - Connecting to: https://sat631.local.domain using the account: admin
 2/4 - Collecting Content Host information ...
+Time to conclude (seconds): 0.643821954727
 3/4 - Processing all entries ...
+Time to conclude (seconds): 9.01923179626
 4/4 - Writing the file ... /tmp/complete_hypervisor_content-host_report.csv with 9 rows
-Time to conclude (seconds): 10.0496041775
+TOTAL Time to conclude (seconds): 9.66329813004
 $
 ---
 
