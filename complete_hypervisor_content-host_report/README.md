@@ -13,9 +13,18 @@ Edit the file and update the fields to match with your environment
  - USERNAME = "admin"
  - PASSWORD = "redhat"
 
-# ./complete_hypervisors_content-host_report.py | tee -a /tmp/complete_hypervisors_content-host_report.csv
+# ./complete_hypervisors_content-host_report.py
 
-This process will spend some time according to the size of your environment, then, please, be patient. :-)
+This process will spend some time according to the size of your environment, then, please, be patient. :-). The output will be similar to ...
+---
+$ ./complete_hypervisor_content-host_report.py 
+1/4 - Connecting to: https://sat631.local.domain using the account: admin
+2/4 - Collecting Content Host information ...
+3/4 - Processing all entries ...
+4/4 - Writing the file ... /tmp/complete_hypervisor_content-host_report.csv with 9 rows
+Time to conclude (seconds): 10.0496041775
+$
+---
 
 After concluding the output will be something similar to below *the format*
 
