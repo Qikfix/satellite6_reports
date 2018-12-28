@@ -26,7 +26,10 @@ $ ./complete_hypervisor_content-host_report.py
     
 ## Phase 1 (4124 Hypervisors): 2018-12-28 00:10:55.666465
 ## Phase 2: 2018-12-28 00:14:16.806281
-...
+## Phase 3: 2018-12-28 06:31:06.203348
+Saving on file: /tmp/ch_entitlement.csv
+Ending: 2018-12-28 06:31:06.270154
+$
 ---
 
 After concluding the output will be something similar to below *the format*
@@ -56,5 +59,15 @@ virt-who-ironman.home-1,None,None,None
 $
 ---
 ```
+
+Now, to parse all the files, let's do it.
+```
+$ ./post_generate.sh 
+Dir /tmp/complete_report ok
+
+## Please check inside /tmp/complete_report
+$
+```
+This command will generate all files with all possible combination of entitlement in your environment. All of them as csv and with header.
 
 Using this report you will be able to identify what Entitlement is attached in your Hypervisor as in your Content Host.
