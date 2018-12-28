@@ -60,7 +60,7 @@ $
 ---
 ```
 
-Now, to parse all the files, let's do it.
+Now, to parse all the information, let's do it.
 ```
 $ ./post_generate.sh 
 Dir /tmp/complete_report ok
