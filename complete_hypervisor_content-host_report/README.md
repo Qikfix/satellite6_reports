@@ -18,21 +18,22 @@ Edit the file and update the fields to match with your environment
 This process will spend some time according to the size of your environment, then, please, be patient. :-). The output will be similar to ...
 ---
 $ ./complete_hypervisor_content-host_report.py 
-1/4 - Connecting to: https://sat631.local.domain using the account: admin
-2/4 - Collecting Content Host information ...
-Time to conclude (seconds): 0.643821954727
-3/4 - Processing all entries ...
-Time to conclude (seconds): 9.01923179626
-4/4 - Writing the file ... /tmp/complete_hypervisor_content-host_report.csv with 9 rows
-TOTAL Time to conclude (seconds): 9.66329813004
-$
+
+    Script in 3 Phases
+        1. Collect the whole Content Host info from Satellite and filter only virt-who-*
+        2. Process all Hypervisors (virt-who-*) and Content Hosts running on the TOP of each one
+        3. Generate a huge CSV file with the entitlement information 
+    
+## Phase 1 (4124 Hypervisors): 2018-12-28 00:10:55.666465
+## Phase 2: 2018-12-28 00:14:16.806281
+...
 ---
 
 After concluding the output will be something similar to below *the format*
 
 // Hypervisor and Content Host subscribed
 ---
-$ cat /tmp/complete_hypervisor_content-host_report.csv
+$ cat /tmp/ch_entitlement.csv
 hypervisor_name,hypervisor_entitlement,content_host_name,content_host_entitlement
 virt-who-ironman.home-1,Employee SKU,testmachine01.local.domain,zabbix
 virt-who-ironman.home-1,Employee SKU,testmachine01.local.domain,Employee SKU
@@ -41,7 +42,7 @@ $
 
 // Only Hypervisor subscribed
 ---
-$ cat /tmp/complete_hypervisor_content-host_report.csv
+$ cat /tmp/ch_entitlement.csv
 hypervisor_name,hypervisor_entitlement,content_host_name,content_host_entitlement
 virt-who-ironman.home-1,Employee SKU,None,None
 $
@@ -49,7 +50,7 @@ $
 
 // Hypervisor without subscription
 ---
-$ cat /tmp/complete_hypervisor_content-host_report.csv
+$ cat /tmp/ch_entitlement.csv
 hypervisor_name,hypervisor_entitlement,content_host_name,content_host_entitlement
 virt-who-ironman.home-1,None,None,None
 $
