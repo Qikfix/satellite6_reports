@@ -68,6 +68,6 @@ Dir /tmp/complete_report ok
 ## Please check inside /tmp/complete_report
 $
 ```
-This command will generate all files with all possible combination of entitlement in your environment. All of them as csv and with header.
+This command will generate a bunch of files with all possible combination of entitlement in your environment (Hypervisors and Content Hosts). All of them as csv and with header.
 
 Using this report you will be able to identify what Entitlement is attached in your Hypervisor as in your Content Host.
