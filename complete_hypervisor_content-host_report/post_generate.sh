@@ -14,6 +14,8 @@ check_dir()
 {
   if [ -d $DIR ]; then
     echo "Dir $DIR ok"
+    echo "Cleaning the content of $DIR"
+    rm -rf $DIR/*
   else
     echo "Creating $DIR ..."
     mkdir $DIR
@@ -22,8 +24,19 @@ check_dir()
 
 summary()
 {
- #cat $BASE | sed '1d' | cut -d, -f2,4 | sort | uniq -c | sort -nr	| tee $DIR/summary.log
- cat $BASE | sed '1d' | cut -d, -f2,4 | sort | uniq -c | sort -nr		> $DIR/summary.log
+  echo "### SUMARY REPORT ###"																																	> $DIR/summary.log
+  echo "# of Match\" \"Hypervisor Entitlement\",\"Content Host Entitlement"													>> $DIR/summary.log
+  echo 																																													>> $DIR/summary.log
+  cat $BASE | sed '1d' | cut -d, -f2,4 | sort | uniq -c | sort -nr															>> $DIR/summary.log
+
+  echo 																																													>> $DIR/summary.log
+  echo 																																													>> $DIR/summary.log
+  echo 																																													>> $DIR/summary.log
+  echo "### Consuming Multiple Entitlements (check the Hypervisor and the Content Host) ###"		>> $DIR/summary.log
+  count=$(uniq -d $BASE | wc -l)
+  echo "# of entries: $count"																																		>> $DIR/summary.log
+  echo 																																													>> $DIR/summary.log
+  uniq -d $BASE																																									>> $DIR/summary.log
 }
 
 independent_report()
