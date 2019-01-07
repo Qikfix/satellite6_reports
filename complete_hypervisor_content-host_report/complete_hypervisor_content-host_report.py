@@ -71,7 +71,13 @@ def check_content_host():
     global hypervisor_name
     global subscription_name
 
-    if (len(hyper_detail['subscription_facet_attributes']['virtual_guests']) == 0):
+    try:
+        num_vguests = len(hyper_detail['subscription_facet_attributes']['virtual_guests'])
+    except KeyError:
+        print "KeyError: Hypervisor to check: {}".format(hyper_detail['name'])
+        num_vguests = 0
+
+    if (num_vguests == 0):
         content_host_name = None
         ch_entitlement = None
         # print "{},{},{},{}".format(hypervisor_name,subscription_name,content_host_name,ch_entitlement)
