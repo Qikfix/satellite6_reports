@@ -6,8 +6,6 @@ Some reports to help you on the management process.
 ```
 To use this report, will be necessary proceed according to below
 
-# pip install requests
-
 Edit the file and update the fields to match with your environment
  - URL = "https://satfqdn"
  - USERNAME = "admin"
