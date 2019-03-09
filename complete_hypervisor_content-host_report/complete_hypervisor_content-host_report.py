@@ -107,7 +107,13 @@ def check_content_host():
                 else:
                     for ch_entitlement in content_host_info['results']:
                         # print "{},{},{},{}".format(hypervisor_name,subscription_name,content_host_name,ch_entitlement['product_name'].replace(",",""))
-                        aux = hypervisor_name, subscription_name, content_host_name, ch_entitlement['product_name'].replace(",", "")
+                        try:
+                            product_name_temp = ch_entitlement['product_name'].replace(",", "")
+                        except KeyError:
+                            product_name_temp = "No_Product_Name_Key"
+                        
+                        # aux = hypervisor_name, subscription_name, content_host_name, ch_entitlement['product_name'].replace(",", "")
+                        aux = hypervisor_name, subscription_name, content_host_name, product_name_temp
                         final_list.append(aux)
 
 
