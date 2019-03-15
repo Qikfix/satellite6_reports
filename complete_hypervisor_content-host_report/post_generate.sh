@@ -9,6 +9,7 @@
 BASE="/tmp/ch_entitlement.csv"
 DIR="/tmp/complete_report"
 
+sed -ie 's#/##g' $BASE
 
 check_dir()
 {
@@ -61,7 +62,7 @@ query()
   temp2="$(echo $ch_ent | sed -e 's/ /_/g' -e 's/(//g' -e 's/)//g')"
   file_name="$(echo ${temp1}___${temp2}.log)"
 
-  echo "hypervisor_name,hypervisor_entitlement,content_host_name,content_host_entitlement"																		> $DIR/$file_name
+  echo "hypervisor_name,hypervisor_entitlement,content_host_name,content_host_entitlement"															> $DIR/$file_name
   awk -v hyper_ent="$hyper_ent" -v ch_ent="$ch_ent" -F "," '{if (($2 == hyper_ent) && ($4 == ch_ent)) {print}}' $BASE 	>> $DIR/$file_name
 }
 
