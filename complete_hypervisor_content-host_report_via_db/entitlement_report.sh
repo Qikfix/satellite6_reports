@@ -51,11 +51,13 @@ echo "create view view_ch_list_with_ent as
 	as tb2(hostname varchar(50), type varchar(50), product_id varchar(50),name varchar(200)) ) 
 	as cpcv where view_ch_list.name = cpcv.hostname;" | su - postgres -c "psql foreman"
 
-echo "create view simple_entitlement_report as 
-	select hl.name as hypervisor_fqdn,hl.type as hyper_entitlement_type,hl.product_id as hyper_product_id,hl.entitlement as hypervisor_entitlement,cl.name as content_host_fqdn,cl.type as ch_entitlement_type,cl.product_id as ch_product_id,cl.entitlement as ch_entitlement 
+echo "create view simple_entitlement_report as select hl.name as hypervisor_fqdn,hl.type as hyper_entitlement_type,hl.product_id as hyper_product_id,hl.entitlement as hypervisor_entitlement, cl.name as content_host_fqdn,cl.type as ch_entitlement_type,cl.product_id as ch_product_id,cl.entitlement as ch_entitlement 
 	from view_hypervisor_list_with_ent hl 
 	right join view_ch_list_with_ent cl 
-	on hl.id = cl.hypervisor_host_id;" | su - postgres -c "psql foreman"
+	on hl.id = cl.hypervisor_host_id 
+	order by hypervisor_fqdn,content_host_fqdn;" | su - postgres -c "psql foreman"
+
+
 
 # Print status
 echo "\dv" | su - postgres -c "psql candlepin"
