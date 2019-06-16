@@ -14,7 +14,7 @@ This script should be executed on Satellite Server, after that, will be created 
 ```
 or
 ```
-# echo "select * from simple_entitlement_report;" | su - postgres -c "psql -A foreman" | sed -e 's/,//' -e 's/|/,/g'
+# echo "select * from simple_entitlement_report;" | su - postgres -c "psql -A foreman" | sed -e 's/,//' -e 's/|/,/g' | grep -v ^\(
 ```
  
 The result will be like below
