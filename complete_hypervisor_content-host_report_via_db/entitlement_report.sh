@@ -2,6 +2,14 @@
 
 yum install postgresql-contrib -y
 
+check_package=$(rpm -qa | grep postgresql-contrib | wc -l)
+
+if [ $check_package -eq 0 ]; then
+  echo "Package postgresql-contrib not installed. Check your repos!"
+  echo "exiting ...."
+  exit 1
+fi
+
 # dblink
 echo "create extension dblink" | su - postgres -c "psql foreman"
 
