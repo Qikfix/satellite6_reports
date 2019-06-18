@@ -5,7 +5,7 @@ This script should be executed on Satellite Server, after that, will be created 
 
 - First, download and run this script
 ```
-# wget <path to this script>
+# wget https://raw.githubusercontent.com/waldirio/satellite6_reports/master/complete_hypervisor_content-host_report_via_db/entitlement_report.sh
 # bash entitlement_report.sh
 ```
 - Execute the command below to generate the report
