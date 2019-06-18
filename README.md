@@ -11,7 +11,8 @@ This report will generate the output looks like below
 ```
  - complete_hypervisor_content-host_report_via_db
 ```
-Script used to create the DB view that will help the customer to analyze all entitlement status (similar to above, however, this query will be directly on the database against Satellite API.
+Script used to create the DB view that will help the customer to analyze all entitlement status
+(similar to above, however, this query will be directly on the database against Satellite API.
 ```
 
  - List all Hypervisors with last checking > 1 week
